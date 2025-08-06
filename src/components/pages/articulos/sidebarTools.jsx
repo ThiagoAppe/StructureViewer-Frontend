@@ -75,7 +75,7 @@ export default function SidebarTools({
         </button>
       </div>
 
-      {/* BOTÓN PARA ANALIZAR COMPARACIÓN */}
+      {/* BOTÓN PARA ANALIZAR COMPARACIÓN
       <div>
         <button
           onClick={AnalizarComparacion}
@@ -84,7 +84,7 @@ export default function SidebarTools({
         >
           {loadingComparacion ? <Loading inline className="w-5 h-5" /> : "Analizar Comparacion"}
         </button>
-      </div>
+      </div> */}
 
       {/* Comparaciones */}
       <div className="flex flex-col gap-4">

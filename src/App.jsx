@@ -9,6 +9,9 @@ import Loading from './components/utils/loading';
 
 import RenderizadorMain from "./components/pages/articulos/main.jsx";
 
+import DocumentControlMain from "./components/pages/documentos/main.jsx";
+import AnalyzeDocumentMain from "./components/pages/documentos/Analyze/main.jsx";
+
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,13 +37,23 @@ export default function App() {
         <NavBar />
         <div className="flex-1">
           <Routes>
+
             {/* Ruta principal */}
             <Route path="/" element={<MainFrame />} />
+
             {/* Ruta artículos */}
             <Route path="/articulos" element={<RenderizadorMain />} />
+
+            {/* Ruta Documentos */}
+            <Route path="/documentos" element={<DocumentControlMain />} />
+
+            {/* Ruta Analizar Documento */}
+            <Route path="/analyze" element={<AnalyzeDocumentMain />} />
+
           </Routes>
         </div>
       </div>
     </BrowserRouter>
+
   );
 }

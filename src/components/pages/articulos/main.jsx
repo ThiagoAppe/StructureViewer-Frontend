@@ -297,7 +297,7 @@ export default function RenderizadorMain() {
                     </div>
                 ))}
 
-                {/* Resultado comparación */}
+                {/* Resultado comparación
                 {ComparacionResult && (
                     <div className="border border-blue-500 p-4 rounded-md w-full">
                         <h2 className="font-bold mb-2 text-blue-700">Resultado Comparación</h2>
@@ -314,7 +314,7 @@ export default function RenderizadorMain() {
                             }}
                         />
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     );

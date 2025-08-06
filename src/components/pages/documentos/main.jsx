@@ -10,7 +10,7 @@ const DocumentControlMain = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchData("/GeneralFunctions/Documentos")
+        fetchData("/Documents")
             .then(data => setDocumentCategories(data))
             .catch(err => setError(err.message));
     }, []);
