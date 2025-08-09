@@ -47,35 +47,42 @@ const PDFSelector = ({ PdfFile, onReset }) => {
         SetIsDrawing(false);
         if (Rect && PdfWrapperRef.current) {
             const container = PdfWrapperRef.current.getBoundingClientRect();
+            const normX = Math.min(Rect.x, Rect.x + Rect.width) / container.width;
+            const normY = Math.min(Rect.y, Rect.y + Rect.height) / container.height;
+            const normWidth = Math.abs(Rect.width) / container.width;
+            const normHeight = Math.abs(Rect.height) / container.height;
+
             const normalized = {
-                x: Rect.x / container.width,
-                y: Rect.y / container.height,
-                width: Rect.width / container.width,
-                height: Rect.height / container.height,
+                x: normX,
+                y: normY,
+                width: normWidth,
+                height: normHeight,
                 page: PageNumber,
             };
+
             SetNormalizedCoords(normalized);
             console.log("Coordenadas normalizadas para backend:", normalized);
         }
     };
 
+
     const HandleSend = async () => {
-    if (!NormalizedCoords || !PdfFile) {
-        alert("Seleccioná una zona del PDF antes de enviar.");
-        return;
-    }
+        if (!NormalizedCoords || !PdfFile) {
+            alert("Seleccioná una zona del PDF antes de enviar.");
+            return;
+        }
 
-    const formData = new FormData();
-    formData.append("file", PdfFile);
-    formData.append("coords", JSON.stringify(NormalizedCoords));
+        const formData = new FormData();
+        formData.append("file", PdfFile);
+        formData.append("coords", JSON.stringify(NormalizedCoords));
 
-    try {
-        const result = await postFormData("/Documents/Analyze", formData);
-        console.log("Respuesta del backend:", result);
-    } catch (err) {
-        alert("Error al enviar los datos al backend");
-    }
-};
+        try {
+            const result = await postFormData("/Documents/Analyze", formData);
+            console.log("Respuesta del backend:", result);
+        } catch (err) {
+            alert("Error al enviar los datos al backend");
+        }
+    };
 
 
     return (
