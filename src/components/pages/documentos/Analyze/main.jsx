@@ -4,12 +4,12 @@ import PDFSelector from "./pdfSelector";
 
 export default function AnalyzeDocumentMain() {
   const [PdfFile, SetPdfFile] = useState(null);
-  const [ConfirmedFilename, SetConfirmedFilename] = useState(null);
+  const [ConfirmedFileName, SetConfirmedFileName] = useState(null);
   const [FileUuid, SetFileUuid] = useState(null);
 
   const HandleConfirm = (file, confirmedName, fileUuid) => {
     SetPdfFile(file);
-    SetConfirmedFilename(confirmedName);
+    SetConfirmedFileName(confirmedName);
     SetFileUuid(fileUuid);
   };
 
@@ -19,7 +19,7 @@ export default function AnalyzeDocumentMain() {
 
       {!PdfFile && <PDFUploader OnConfirm={HandleConfirm} />}
 
-      {PdfFile && ConfirmedFilename && (
+      {PdfFile && ConfirmedFileName && (
         <div className="mt-8 mx-auto rounded-xl shadow text-gray-800">
           {/* Pasamos también el UUID a PDFSelector */}
           <PDFSelector
@@ -27,7 +27,7 @@ export default function AnalyzeDocumentMain() {
             FileUuid={FileUuid}
             onReset={() => {
               SetPdfFile(null);
-              SetConfirmedFilename(null);
+              SetConfirmedFileName(null);
               SetFileUuid(null);
             }}
           />
@@ -36,4 +36,3 @@ export default function AnalyzeDocumentMain() {
     </div>
   );
 }
-

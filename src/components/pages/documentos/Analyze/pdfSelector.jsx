@@ -2,11 +2,12 @@ import React, { useState, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
+
 import { postFormData } from "../../../api/request";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const PDFSelector = ({ PdfFile, onReset }) => {
+const PDFSelector = ({ PdfFile, FileUuid, onReset}) => {
     const [NumPages, SetNumPages] = useState(null);
     const [PageNumber, SetPageNumber] = useState(1);
 
@@ -67,14 +68,16 @@ const PDFSelector = ({ PdfFile, onReset }) => {
 
 
     const HandleSend = async () => {
-        if (!NormalizedCoords || !PdfFile) {
+        console.log("NormalizedCoords:", NormalizedCoords);
+        console.log("FileUuid:", FileUuid);
+        if (!NormalizedCoords || !FileUuid) {
             alert("Seleccioná una zona del PDF antes de enviar.");
             return;
         }
 
         const formData = new FormData();
-        formData.append("file", PdfFile);
-        formData.append("coords", JSON.stringify(NormalizedCoords));
+        formData.append("Uuid", FileUuid);
+        formData.append("Coords", JSON.stringify(NormalizedCoords));
 
         try {
             const result = await postFormData("/Documents/Analyze", formData);
@@ -83,6 +86,7 @@ const PDFSelector = ({ PdfFile, onReset }) => {
             alert("Error al enviar los datos al backend");
         }
     };
+
 
 
     return (

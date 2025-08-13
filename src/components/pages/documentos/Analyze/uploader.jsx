@@ -30,7 +30,8 @@ const PDFUploader = ({ OnConfirm }) => {
     try {
       const data = await postFormData("/Documents/DocumentHandler", formData);
 
-      const fileUuid = data.fileinfo.FileUuid;
+      const fileUuid = data.fileinfo.UUID;
+
 
       OnConfirm(selectedFile, data.fileinfo.FileName, fileUuid);
 
