@@ -77,12 +77,25 @@ function Nodo({ nodo, expandedNodes, toggleNode }) {
 
                 {/* Contenedor de los datos con separación */}
                 <div className="flex items-center gap-x-4">
+                    {/* Código */}
                     <span className="font-bold text-gray-900">{nodo.codigo}</span>
-                    <span className="bg-slate-400 text-white font-semibold px-2 py-0.5 rounded-md">
-                        {nodo.cantidad}
-                    </span>
+
+                    {/* Bloque con letra de cambio + cantidad */}
+                    <div className="flex items-center gap-x-2">
+                        {nodo.letra_cambio && (
+                            <span className="bg-slate-400 text-white font-semibold px-2 py-0.5 rounded-md shadow-sm">
+                                {nodo.letra_cambio}
+                            </span>
+                        )}
+                        <span className="bg-blue-300 text-white font-semibold px-2 py-0.5 rounded-md shadow-sm">
+                            {nodo.cantidad}
+                        </span>
+                    </div>
+
+                    {/* Descripción */}
                     <span className="text-gray-900">{nodo.descripcion}</span>
                 </div>
+
             </motion.div>
 
             {/* Renderizar hijos recursivamente solo si está expandido con animación */}

@@ -22,6 +22,13 @@ const PDFUploader = ({ OnConfirm }) => {
       return;
     }
 
+    // Pedimos el código de estructura ANTES de subir el archivo
+    const structureCode = prompt("Ingrese el código de la estructura a comparar:");
+    if (!structureCode) {
+      alert("Debes ingresar un código de estructura válido.");
+      return;
+    }
+
     setLoading(true);
 
     const formData = new FormData();
@@ -32,8 +39,8 @@ const PDFUploader = ({ OnConfirm }) => {
 
       const fileUuid = data.fileinfo.UUID;
 
-
-      OnConfirm(selectedFile, data.fileinfo.FileName, fileUuid);
+      // Mandamos también el código de estructura al componente padre
+      OnConfirm(selectedFile, data.fileinfo.FileName, fileUuid, structureCode);
 
     } catch (error) {
       alert("Error al subir el archivo al servidor.");
@@ -41,6 +48,7 @@ const PDFUploader = ({ OnConfirm }) => {
       setLoading(false);
     }
   };
+
 
 
   return (

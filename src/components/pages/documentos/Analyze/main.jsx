@@ -6,11 +6,13 @@ export default function AnalyzeDocumentMain() {
   const [PdfFile, SetPdfFile] = useState(null);
   const [ConfirmedFileName, SetConfirmedFileName] = useState(null);
   const [FileUuid, SetFileUuid] = useState(null);
+  const [StructureCode, SetStructureCode] = useState(null);
 
-  const HandleConfirm = (file, confirmedName, fileUuid) => {
+  const HandleConfirm = (file, confirmedName, fileUuid, structureCode) => {
     SetPdfFile(file);
     SetConfirmedFileName(confirmedName);
     SetFileUuid(fileUuid);
+    SetStructureCode(structureCode);
   };
 
   return (
@@ -21,14 +23,15 @@ export default function AnalyzeDocumentMain() {
 
       {PdfFile && ConfirmedFileName && (
         <div className="mt-8 mx-auto rounded-xl shadow text-gray-800">
-          {/* Pasamos también el UUID a PDFSelector */}
           <PDFSelector
             PdfFile={PdfFile}
             FileUuid={FileUuid}
+            StructureCode={StructureCode}
             onReset={() => {
               SetPdfFile(null);
               SetConfirmedFileName(null);
               SetFileUuid(null);
+              SetStructureCode(null);
             }}
           />
         </div>
