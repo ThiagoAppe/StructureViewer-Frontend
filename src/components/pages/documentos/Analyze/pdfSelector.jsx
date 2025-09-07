@@ -15,7 +15,7 @@ const PDFSelector = ({ PdfFile, FileUuid, StructureCode, onReset }) => {
   const [StartPoint, SetStartPoint] = useState(null);
   const [Rect, SetRect] = useState(null);
   const [NormalizedCoords, SetNormalizedCoords] = useState(null);
-  const [AnalysisResult, SetAnalysisResult] = useState(null); // <-- nuevo
+  const [AnalysisResult, SetAnalysisResult] = useState(null);
 
   const PdfWrapperRef = useRef(null);
 
@@ -77,12 +77,12 @@ const PDFSelector = ({ PdfFile, FileUuid, StructureCode, onReset }) => {
     const formData = new FormData();
     formData.append("Uuid", FileUuid);
     formData.append("Coords", JSON.stringify(NormalizedCoords));
-    formData.append("Codigo", StructureCode); // <-- enviamos el código
+    formData.append("Codigo", StructureCode);
 
     try {
       const result = await postFormData("/Documents/Analyze", formData);
       console.log("Respuesta del backend:", result);
-      SetAnalysisResult(result); // <-- guardamos resultado para mostrar reporte
+      SetAnalysisResult(result);
     } catch (err) {
       alert("Error al enviar los datos al backend");
       console.error(err);
@@ -90,7 +90,8 @@ const PDFSelector = ({ PdfFile, FileUuid, StructureCode, onReset }) => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col">
+      {/* Barra de controles */}
       <div className="flex items-center gap-4 mb-4">
         <button
           onClick={() => SetPageNumber((prev) => Math.max(1, prev - 1))}
@@ -129,42 +130,46 @@ const PDFSelector = ({ PdfFile, FileUuid, StructureCode, onReset }) => {
         </button>
       </div>
 
-      <div
-        ref={PdfWrapperRef}
-        className="relative border shadow rounded overflow-hidden bg-gray-50 inline-block"
-        onMouseDown={HandleMouseDown}
-        onMouseMove={HandleMouseMove}
-        onMouseUp={HandleMouseUp}
-        style={{ cursor: IsDrawing ? "crosshair" : "default" }}
-      >
-        <Document file={PdfFile} onLoadSuccess={OnLoadSuccess}>
-          <Page
-            pageNumber={PageNumber}
-            className="pdf-page select-none"
-            renderAnnotationLayer
-            renderTextLayer
-          />
-        </Document>
+      {/* Contenedor principal: PDF a la izquierda, reporte a la derecha */}
+      <div className="flex flex-row gap-6">
+        {/* PDF */}
+        <div
+          ref={PdfWrapperRef}
+          className="relative border shadow rounded overflow-hidden bg-gray-50 inline-block"
+          onMouseDown={HandleMouseDown}
+          onMouseMove={HandleMouseMove}
+          onMouseUp={HandleMouseUp}
+          style={{ cursor: IsDrawing ? "crosshair" : "default" }}
+        >
+          <Document file={PdfFile} onLoadSuccess={OnLoadSuccess}>
+            <Page
+              pageNumber={PageNumber}
+              className="pdf-page select-none"
+              renderAnnotationLayer
+              renderTextLayer
+            />
+          </Document>
 
-        {Rect && (
-          <div
-            className="absolute border-4 border-blue-500 bg-blue-300 bg-opacity-20 pointer-events-none"
-            style={{
-              left: `${Math.min(Rect.x, Rect.x + Rect.width)}px`,
-              top: `${Math.min(Rect.y, Rect.y + Rect.height)}px`,
-              width: `${Math.abs(Rect.width)}px`,
-              height: `${Math.abs(Rect.height)}px`,
-            }}
-          />
+          {Rect && (
+            <div
+              className="absolute border-4 border-blue-500 bg-blue-300 bg-opacity-20 pointer-events-none"
+              style={{
+                left: `${Math.min(Rect.x, Rect.x + Rect.width)}px`,
+                top: `${Math.min(Rect.y, Rect.y + Rect.height)}px`,
+                width: `${Math.abs(Rect.width)}px`,
+                height: `${Math.abs(Rect.height)}px`,
+              }}
+            />
+          )}
+        </div>
+
+        {/* Reporte al costado */}
+        {AnalysisResult && (
+          <div className="w-1/3 border-l pl-4">
+            <Report Result={AnalysisResult} />
+          </div>
         )}
       </div>
-
-      {/* Mostrar reporte después del análisis */}
-      {AnalysisResult && (
-        <div className="mt-6 w-full max-w-4xl">
-          <Report Result={AnalysisResult} />
-        </div>
-      )}
     </div>
   );
 };

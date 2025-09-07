@@ -7,15 +7,17 @@ export async function verificarToken() {
       credentials: "include",
     });
 
-    return res.ok;
+    if (!res.ok) return null;
+
+    const data = await res.json();
+    return data;
   } catch (e) {
     console.error("Error en verificarToken:", e);
-    return false;
+    return null;
   }
 }
 
-
-export async function login(username, password) {
+export async function login(user_name, password) {
   try {
     const res = await fetch(apiUrl("/users/login"), {
       method: "POST",
@@ -23,7 +25,7 @@ export async function login(username, password) {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ user_name, password }),
     });
     return res.ok;
   } catch (e) {
@@ -31,7 +33,6 @@ export async function login(username, password) {
     return false;
   }
 }
-
 
 export async function logout() {
   try {
@@ -46,4 +47,3 @@ export async function logout() {
     return false;
   }
 }
-
