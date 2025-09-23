@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { postFormData } from '../../../api/request';
 
 const PDFUploader = ({ OnConfirm }) => {
@@ -37,19 +36,22 @@ const PDFUploader = ({ OnConfirm }) => {
     try {
       const data = await postFormData("/Documents/DocumentHandler", formData);
 
-      const fileUuid = data.fileinfo.UUID;
+      console.log("Respuesta del backend:", data);
+
+      // 👇 usar las claves correctas que devuelve el back
+      const fileUuid = data.fileinfo.uuid;
+      const fileName = data.fileinfo.file_name;
 
       // Mandamos también el código de estructura al componente padre
-      OnConfirm(selectedFile, data.fileinfo.FileName, fileUuid, structureCode);
+      OnConfirm(selectedFile, fileName, fileUuid, structureCode);
 
     } catch (error) {
+      console.error("Error al subir:", error);
       alert("Error al subir el archivo al servidor.");
     } finally {
       setLoading(false);
     }
   };
-
-
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -72,7 +74,6 @@ const PDFUploader = ({ OnConfirm }) => {
             {loading ? 'Subiendo...' : 'Confirmar'}
           </button>
         </div>
-
       </div>
     </div>
   );

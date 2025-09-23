@@ -10,7 +10,7 @@ import RenderizadorMain from "./components/pages/articulos/main.jsx";
 import DocumentControlMain from "./components/pages/documentos/main.jsx";
 import AnalyzeDocumentMain from "./components/pages/documentos/Analyze/main.jsx";
 import DocumentDashboardMain from "./components/pages/documentos/digitalEsign/documentDashboardMain.jsx";
-import SendDocumentsForm from "./components/pages/documentos/digitalEsign/sendDocumentForm.jsx";
+import DocumentESignSenderMain from "./components/pages/documentos/digitalEsign/documentEsignSender/documentESignSenderMain.jsx";
 
 import PrivateRoute from "./components/routes/privateRoute";
 import RequirePermission from "./components/routes/requirePermission";
@@ -59,7 +59,7 @@ function AppContent() {
 
             {/* Enviar documentos */}
             <Route element={<RequirePermission perm="send_document"/>}>
-              <Route path="/send-documents" element={<SendDocumentsForm />} />
+              <Route path="/send-documents" element={<DocumentESignSenderMain />} />
             </Route>
 
             {/* Analyze */}

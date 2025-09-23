@@ -14,29 +14,7 @@ export default function SendDocumentsForm() {
 
     return (
         <main className="h-full w-fit mx-auto bg-white p-4 rounded-xl flex flex-col overflow-auto">
-            <content className="w-full px-6 mx-auto flex flex-col items-center">
-                {/* Header */}
-                <h1 className="text-3xl font-bold mb-4">Enviar solicitud de firma</h1>
-
-                {/* Paso 1 */}
-                <div className="mb-4 w-[90%] flex flex-col items-center">
-                    <p className="text-lg font-semibold mb-2">Paso 1: Selecciona el archivo(s) a firmar</p>
-                    <div className="border-2 border-dashed border-gray-300 p-6 rounded-lg text-center w-full">
-                        <h4 className="mb-2">Arrastra y suelta archivos o haz clic en el botón abajo</h4>
-                        <label className="inline-block mb-2 bg-gray-200 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300">
-                            Elegir archivo(s)
-                            <input
-                                type="file"
-                                multiple
-                                accept=".pdf"
-                                className="hidden"
-                                onChange={handleFileChange}
-                            />
-                        </label>
-                        <p>{files.length > 0 ? `${files.length} archivo(s) seleccionado(s)` : "Ningún archivo seleccionado"}</p>
-                    </div>
-                </div>
-
+            <div className="w-full px-6 mx-auto flex flex-col items-center">
                 {/* Paso 2 */}
                 <div className="mb-6 w-[90%] flex flex-col items-center">
                     <p className="text-lg font-semibold mb-2">Paso 2: Agregar un título y mensaje</p>
@@ -196,7 +174,7 @@ export default function SendDocumentsForm() {
                 <button className="bg-green-600 w-1/2 text-white text-xl px-4 py-2 rounded-lg hover:bg-green-700 transition">
                     Siguiente
                 </button>
-            </content>
+            </div>
         </main>
     );
 }
