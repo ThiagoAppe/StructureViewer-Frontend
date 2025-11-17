@@ -16,7 +16,7 @@ export default function AnalyzeDocumentMain() {
   };
 
   return (
-    <div className="p-4 text-white bg-gray-900 min-h-screen">
+    <div className="p-4 text-white bg-gray-900">
       <h1 className="text-2xl text-center font-bold mb-4">Analizar Documento</h1>
 
       {!PdfFile && <PDFUploader OnConfirm={HandleConfirm} />}

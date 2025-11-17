@@ -27,7 +27,7 @@ const documentFunctionsList = [
     title: "Solicitar Firma",
     description:
       "Interfaz para crear y gestionar solicitudes de firma de documentos.",
-    path: "/request-signature",
+    path: "/send-documents",
     functions: [
       "Crear solicitud de firma",
       "Enviar documentos para firma",

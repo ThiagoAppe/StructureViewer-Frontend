@@ -22,7 +22,7 @@ export default function SidebarTools({
 }) {
   return (
     <aside className="min-w-[320px] max-w-[320px] bg-white rounded-md shadow-md p-4 flex flex-col gap-6 overflow-y-auto m-6">
-      <h2 className="text-black font-semibold text-3xl">Herramientas</h2>
+      <h2 className="text-black font-semibold text-3xl">Estructuras</h2>
 
       {/* Barra de búsqueda arriba */}
       <div>
