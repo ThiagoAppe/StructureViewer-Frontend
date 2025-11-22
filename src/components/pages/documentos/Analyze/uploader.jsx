@@ -46,7 +46,7 @@ const AnalyzeUploader = ({ OnConfirm }) => {
 
     return (
         <div className="mb-4 max-w-lg flex flex-col items-center mx-auto">
-            <p className="text-lg font-semibold mb-2">Paso 1: Selecciona el archivo a comparar</p>
+            <p className="text-lg font-semibold mb-2">Paso 1: Selecciona el archivo a Analizar</p>
             <GenericUploader
                 onFilesSelected={handleFileSelected}
                 accept=".pdf"
