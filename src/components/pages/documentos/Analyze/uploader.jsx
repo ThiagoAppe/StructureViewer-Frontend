@@ -29,7 +29,7 @@ const AnalyzeUploader = ({ OnConfirm }) => {
         formData.append("file", file);
 
         try {
-            const data = await postFormData("/Documents/DocumentHandler", formData);
+            const data = await postFormData("/documents/document-handler", formData);
             
             const fileUuid = data.fileinfo.uuid;
             const originalFileName = data.fileinfo.file_name;

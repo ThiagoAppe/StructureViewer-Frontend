@@ -75,12 +75,12 @@ const PDFSelector = ({ PdfFile, FileUuid, StructureCode, onReset }) => {
     }
 
     const formData = new FormData();
-    formData.append("Uuid", FileUuid);
-    formData.append("Coords", JSON.stringify(NormalizedCoords));
-    formData.append("Codigo", StructureCode);
+    formData.append("uuid", FileUuid);
+    formData.append("coords", JSON.stringify(NormalizedCoords));
+    formData.append("codigo", StructureCode);
 
     try {
-      const result = await postFormData("/Documents/Analyze", formData);
+      const result = await postFormData("/documents/analyze", formData);
       console.log("Respuesta del backend:", result);
       SetAnalysisResult(result);
     } catch (err) {
@@ -88,6 +88,7 @@ const PDFSelector = ({ PdfFile, FileUuid, StructureCode, onReset }) => {
       console.error(err);
     }
   };
+
 
   return (
     <div className="flex flex-col">
