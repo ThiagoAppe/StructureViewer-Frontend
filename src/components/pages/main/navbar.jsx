@@ -49,6 +49,7 @@ const PrincipalButtons = [
     ),
     submenu: [
       { label: "Perfil", to: "/perfil" },
+      { label: "Notificaciones", to: "/notifications" },
       { label: "Configuración", to: "/configuracion" },
       { label: "Soporte", to: "/soporte" },
       {

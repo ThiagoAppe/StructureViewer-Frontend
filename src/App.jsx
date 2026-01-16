@@ -11,6 +11,9 @@ import DocumentControlMain from "./components/pages/documentos/main.jsx";
 import AnalyzeDocumentMain from "./components/pages/documentos/Analyze/main.jsx";
 import DocumentDashboardMain from "./components/pages/documentos/digitalEsign/documentDashboardMain.jsx";
 import DocumentESignSenderMain from "./components/pages/documentos/digitalEsign/documentEsignSender/documentESignSenderMain.jsx";
+import NotificationsHome from "./components/pages/notifications/home.jsx";
+
+
 
 import PrivateRoute from "./components/routes/privateRoute";
 import RequirePermission from "./components/routes/requirePermission";
@@ -58,7 +61,7 @@ function AppContent() {
             </Route>
 
             {/* Enviar documentos */}
-            <Route element={<RequirePermission perm="send_document"/>}>
+            <Route element={<RequirePermission perm="send_document" />}>
               <Route path="/send-documents" element={<DocumentESignSenderMain />} />
             </Route>
 
@@ -66,6 +69,15 @@ function AppContent() {
             <Route element={<RequirePermission perm="analyze_document" />}>
               <Route path="/analyze" element={<AnalyzeDocumentMain />} />
             </Route>
+
+            {/* Notificaciones */}
+            <Route element={<RequirePermission perm="view_notifications" />}>
+              <Route path="/notifications" element={<NotificationsHome />} />
+            </Route>
+
+
+
+
           </Route>
         </Routes>
       </div>
