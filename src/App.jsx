@@ -8,7 +8,7 @@ import Loading from "./components/utils/loading.jsx";
 
 import RenderizadorMain from "./components/pages/articulos/main.jsx";
 import DocumentControlMain from "./components/pages/documentos/main.jsx";
-import AnalyzeDocumentMain from "./components/pages/documentos/Analyze/main.jsx";
+import AnalyzeDocumentMain from "./components/pages/documentos/Analyze/components/AnalyzeDocumentMain.jsx";
 import DocumentDashboardMain from "./components/pages/documentos/digitalEsign/documentDashboardMain.jsx";
 import DocumentESignSenderMain from "./components/pages/documentos/digitalEsign/documentEsignSender/documentESignSenderMain.jsx";
 import NotificationsHome from "./components/pages/notifications/home.jsx";

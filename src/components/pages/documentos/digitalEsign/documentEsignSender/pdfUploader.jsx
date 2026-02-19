@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { postFormData } from "../../../../api/request";
-import GenericUploader from "../../../../common/genericUploader";
+import GenericUploader from "../../../../common/pdfTools/genericPdfUploader";
 
 export default function PDFUploader({ onUploadSuccess }) {
     const [loading, setLoading] = useState(false);
