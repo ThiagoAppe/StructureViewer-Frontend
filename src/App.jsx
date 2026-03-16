@@ -6,7 +6,10 @@ import MainFrame from './components/pages/main/home';
 import NavBar from "./components/pages/main/navbar";
 import Loading from "./components/utils/loading.jsx";
 
-import RenderizadorMain from "./components/pages/articulos/main.jsx";
+import ArticlesMainframe from "./components/pages/articles/main/main.jsx";
+import SearchMain from "./components/pages/articles/search/searchMain.jsx";
+import StructureMain from "./components/pages/articles/structure/main.jsx";
+
 import DocumentControlMain from "./components/pages/documentos/main.jsx";
 import AnalyzeDocumentMain from "./components/pages/documentos/Analyze/main.jsx";
 import DocumentDashboardMain from "./components/pages/documentos/digitalEsign/documentDashboardMain.jsx";
@@ -38,47 +41,52 @@ function AppContent() {
       {!hideNavbarRoutes.includes(location.pathname) && <NavBar />}
       <div className="flex-1">
         <Routes>
+
           {/* Public */}
           <Route path="/login" element={<Login />} />
 
           {/* Private */}
           <Route element={<PrivateRoute />}>
+
             <Route path="/" element={<MainFrame />} />
 
-            {/* Articulos */}
+            {/* ARTICULOS */}
             <Route element={<RequirePermission perm="view_articles" />}>
-              <Route path="/articulos" element={<RenderizadorMain />} />
+              <Route path="/articulos">
+                <Route index element={<ArticlesMainframe />} />
+                <Route path="buscar" element={<SearchMain />} />
+                <Route path="estructura" element={<StructureMain />} />
+              </Route>
             </Route>
 
-            {/* Documentos */}
-            <Route element={<RequirePermission perm="view_documents" />}>
-              <Route path="/documentos" element={<DocumentControlMain />} />
+            {/* DOCUMENTOS */}
+            <Route path="/documentos">
+
+              <Route element={<RequirePermission perm="view_documents" />}>
+                <Route index element={<DocumentControlMain />} />
+              </Route>
+
+              <Route element={<RequirePermission perm="dashboard_document" />}>
+                <Route path="dashboard" element={<DocumentDashboardMain />} />
+              </Route>
+
+              <Route element={<RequirePermission perm="send_document" />}>
+                <Route path="send" element={<DocumentESignSenderMain />} />
+              </Route>
+
+              <Route element={<RequirePermission perm="analyze_document" />}>
+                <Route path="analyze" element={<AnalyzeDocumentMain />} />
+              </Route>
+
             </Route>
 
-            {/* Dashboard */}
-            <Route element={<RequirePermission perm="dashboard_document" />}>
-              <Route path="/dashboard" element={<DocumentDashboardMain />} />
-            </Route>
-
-            {/* Enviar documentos */}
-            <Route element={<RequirePermission perm="send_document" />}>
-              <Route path="/send-documents" element={<DocumentESignSenderMain />} />
-            </Route>
-
-            {/* Analyze */}
-            <Route element={<RequirePermission perm="analyze_document" />}>
-              <Route path="/analyze" element={<AnalyzeDocumentMain />} />
-            </Route>
-
-            {/* Notificaciones */}
+            {/* NOTIFICATIONS */}
             <Route element={<RequirePermission perm="view_notifications" />}>
               <Route path="/notifications" element={<NotificationsHome />} />
             </Route>
 
-
-
-
           </Route>
+
         </Routes>
       </div>
     </div>
