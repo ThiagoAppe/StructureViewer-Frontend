@@ -10,12 +10,16 @@ export default defineConfig({
     },
   },
   server: {
+    host: true,
+    allowedHosts: [
+      "ingenieria.local"
+    ],
     proxy: {
       "/api": {
-        target: "http://10.0.10.157:8000",
+        // target: "http://10.0.10.157:8000",
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ""),
-      },
-    },
-  },
-});
+        rewrite: (path) => path.replace(/^\/api/, "")
+      }
+    }
+  }
+})
