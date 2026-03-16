@@ -21,6 +21,17 @@ export function AuthProvider({ children }) {
         console.error("Error verificando token:", err);
         setUser(null);
         setError("Error al verificar la sesión");
+        try {
+          await fetch(apiUrl("/users/logout"), {
+            method: "POST",
+            credentials: "include"
+          });
+        } catch (error) {
+          console.error("Error al cerrar sesión:", error);
+        } finally {
+          // Forzar recarga en la ruta de inicio para limpiar cualquier estado residual
+          window.location.href = "/";
+        }
       } finally {
         setLoading(false);
       }

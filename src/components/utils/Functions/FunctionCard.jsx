@@ -1,8 +1,10 @@
 import React from "react";
 
-const FunctionCard = ({ title, description, functions = [], variant = "default" }) => {
+const FunctionCard = ({ title, description, functions, variant = "default" }) => {
+  const safeFunctions = Array.isArray(functions) ? functions : [];
+
   const baseClasses =
-    "bg-white rounded-2xl shadow p-6 cursor-pointer block transition-shadow hover:shadow-lg";
+    "bg-white rounded-2xl shadow p-6 cursor-pointer block transition-shadow hover:shadow-lg h-full flex flex-col";
   const textColor = variant === "alternate" ? "text-white" : "text-black";
   const descriptionColor = variant === "alternate" ? "text-gray-300" : "text-gray-700";
   const listTextColor = variant === "alternate" ? "text-gray-200" : "text-gray-600";
@@ -19,12 +21,16 @@ const FunctionCard = ({ title, description, functions = [], variant = "default" 
           {description}
         </p>
       )}
-      {functions.length > 0 && (
-        <ul className={`list-disc list-inside text-sm space-y-1 ${listTextColor}`}>
-          {functions.map((func, index) => (
+      {safeFunctions.length > 0 ? (
+        <ul className={`list-disc list-inside text-sm space-y-1 ${listTextColor} flex-1`}>
+          {safeFunctions.map((func, index) => (
             <li key={index}>{func}</li>
           ))}
         </ul>
+      ) : (
+        <p className={`text-sm italic ${listTextColor} flex-1`}>
+          No hay funcionalidades disponibles.
+        </p>
       )}
     </div>
   );
